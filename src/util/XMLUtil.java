@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class XMLUtil {
 
+    // 读取目标XML文件
     public static Document readXML(String filepath){
         try {
             SAXReader reader = new SAXReader();
@@ -24,6 +25,7 @@ public class XMLUtil {
         return null;
     }
 
+    // 提取XML文件中的弹幕列表
     public static List<Danmaku> extractFromFile(Document document){
         List<Danmaku> danmakuList = new ArrayList<Danmaku>();
         List<Element> elementList = document.getRootElement().elements("d");

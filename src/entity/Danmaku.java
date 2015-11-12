@@ -1,6 +1,7 @@
 package entity;
 
 /**
+ * µ―Δ»ΐΰΚµΜε
  * Created by TongjiSSE on 2015/11/12.
  */
 public class Danmaku {

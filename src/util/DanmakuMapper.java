@@ -7,6 +7,7 @@ import entity.Danmaku;
  */
 public class DanmakuMapper {
 
+    // 通过XML中提取出的parameter字符串和content字符串，映射到弹幕类
     public static Danmaku convert(String parameter, String content){
         Danmaku danmaku = new Danmaku();
         danmaku.setContent(content);
