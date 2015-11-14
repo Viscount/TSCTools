@@ -1,9 +1,12 @@
 package util;
 
+import entity.RequestParam;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Created by TongjiSSE on 2015/11/13.
@@ -15,20 +18,20 @@ public class LtpCloudUtil {
 
     public static String reqeustLtpCloud( String text ){
         try {
-            URL restServiceURL = new URL(api_url);
+            RequestParam requestParam = new RequestParam(api_key,text,"all","json");
+            URL restServiceURL = new URL(buildURL(requestParam));
             HttpURLConnection httpConnection = (HttpURLConnection) restServiceURL.openConnection();
             httpConnection.setRequestMethod("GET");
             httpConnection.setRequestProperty("Accept", "application/json");
-            httpConnection.setRequestProperty("api_key",api_key);
-            httpConnection.setRequestProperty("text",text);
-            httpConnection.setRequestProperty("pattern","all");
-            httpConnection.setRequestProperty("format","json");
+            httpConnection.setRequestProperty("Charset", "UTF-8");
 
             if (httpConnection.getResponseCode() != 200) {
                 throw new RuntimeException("HTTP GET Request Failed with Error code : "
                         + httpConnection.getResponseCode());
             }
-            BufferedReader responseBuffer = new BufferedReader(new InputStreamReader((httpConnection.getInputStream())));
+            InputStreamReader inputReader = new InputStreamReader(httpConnection.getInputStream(),"UTF-8");
+            BufferedReader responseBuffer = new BufferedReader(inputReader);
+
             String output;
             String result = "";
             while ((output = responseBuffer.readLine()) != null) {
@@ -42,8 +45,23 @@ public class LtpCloudUtil {
         return null;
     }
 
+    public static String buildURL(RequestParam requestParam){
+        try{
+            String resultURL = api_url;
+            resultURL += "?";
+            resultURL += "api_key=" + requestParam.getApi_key() + "&";
+            resultURL += "text=" + URLEncoder.encode(requestParam.getText(), "UTF-8") + "&";
+            resultURL += "pattern=" + requestParam.getPattern() + "&";
+            resultURL += "format=" + requestParam.getFormat();
+            return resultURL;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return  null;
+    }
+
     public static void main(String[] args){
-        String response = LtpCloudUtil.reqeustLtpCloud("ÎÒÊÇÖÐ¹úÈË");
+        String response = LtpCloudUtil.reqeustLtpCloud("æˆ‘æ˜¯ä¸­å›½äºº");
         System.out.println(response);
     }
 
