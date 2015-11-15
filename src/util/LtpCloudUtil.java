@@ -1,12 +1,15 @@
 package util;
 
 import entity.RequestParam;
+import entity.Word;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * Created by TongjiSSE on 2015/11/13.
@@ -16,7 +19,14 @@ public class LtpCloudUtil {
     private static String api_key = "Q5s0X4R6YHmLvHZk8umcqysY2xek5IyxjGrrDKZW";
     private static String api_url = "http://api.ltp-cloud.com/analysis/";
 
-    public static String reqeustLtpCloud( String text ){
+    public static List<Word> parseText( String text ){
+        String rawJson = requestLtpCloud(text);
+        String modifiedJson = convertToWordListJson(rawJson);
+        List<Word> result = JsonUtil.toObjectList(modifiedJson, Word.class);
+        return result;
+    }
+
+    private static String requestLtpCloud( String text ){
         try {
             RequestParam requestParam = new RequestParam(api_key,text,"all","json");
             URL restServiceURL = new URL(buildURL(requestParam));
@@ -45,7 +55,7 @@ public class LtpCloudUtil {
         return null;
     }
 
-    public static String buildURL(RequestParam requestParam){
+    private static String buildURL(RequestParam requestParam){
         try{
             String resultURL = api_url;
             resultURL += "?";
@@ -60,9 +70,26 @@ public class LtpCloudUtil {
         return  null;
     }
 
+    private static String convertToWordListJson(String rawJson){
+        int beginIndex = 0;
+        int endIndex = rawJson.length();
+        int countLeft = 0;
+        while ( countLeft < 2 ){
+            if ( rawJson.charAt(beginIndex) == '[' ) countLeft++;
+            beginIndex++;
+        }
+        int countRight = 0;
+        while ( countRight < 2 ){
+            endIndex--;
+            if ( rawJson.charAt(endIndex) == ']' ) countRight++;
+        }
+        String modifiedJson = rawJson.substring(beginIndex,endIndex);
+        return modifiedJson.trim();
+    }
+
     public static void main(String[] args){
-        String response = LtpCloudUtil.reqeustLtpCloud("我是中国人");
-        System.out.println(response);
+        List<Word> response = LtpCloudUtil.parseText("工信处女干事每月经过下属科室都要亲口交代24口交换机等技术性器件的安装工作");
+        System.out.println(JsonUtil.toJson(response));
     }
 
 }
