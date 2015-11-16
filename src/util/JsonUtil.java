@@ -37,7 +37,6 @@ public class JsonUtil {
     }
 
     public static <T> List<T> toObjectList(String json, Class<T> clazz){
-        List<T> objectList = gson.fromJson(json, new TypeToken<List<T>>(){}.getType());
-        return objectList;
+        return gson.fromJson(json, new TypeToken<List<T>>(){}.getType());
     }
 }

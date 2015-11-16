@@ -4,7 +4,7 @@ package entity;
  * 弹幕类实体
  * Created by TongjiSSE on 2015/11/12.
  */
-public class Danmaku {
+public class Danmaku implements Comparable<Danmaku>{
     // 视频中出现的秒数
     private double videoSecond;
     // 弹幕的模式 1..3 滚动弹幕 4底端弹幕 5顶端弹幕 6.逆向弹幕 7精准定位 8高级弹幕
@@ -94,5 +94,12 @@ public class Danmaku {
 
     public void setId(long id) {
         Id = id;
+    }
+
+    @Override
+    public int compareTo(Danmaku o) {
+        if ( this.getVideoSecond() == o.getVideoSecond() ) return 0;
+        else if ( this.getVideoSecond() < o.getVideoSecond() ) return -1;
+        else return 1;
     }
 }
