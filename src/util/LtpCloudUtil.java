@@ -26,9 +26,9 @@ public class LtpCloudUtil {
         return result;
     }
 
-    private static String requestLtpCloud( String text ){
+    public static String requestLtpCloud( String text ){
         try {
-            Thread.sleep(10);
+            Thread.sleep(100);
             RequestParam requestParam = new RequestParam(api_key,text,"all","json");
             URL restServiceURL = new URL(buildURL(requestParam));
             HttpURLConnection httpConnection = (HttpURLConnection) restServiceURL.openConnection();

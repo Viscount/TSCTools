@@ -1,11 +1,13 @@
 package util;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +39,12 @@ public class JsonUtil {
     }
 
     public static <T> List<T> toObjectList(String json, Class<T> clazz){
-        return gson.fromJson(json, new TypeToken<List<T>>(){}.getType());
+        List<T> list = new ArrayList<T>();
+        JsonParser jsonParser = new JsonParser();
+        JsonArray array = new JsonParser().parse(json).getAsJsonArray();
+        for(final JsonElement elem : array){
+            list.add(new Gson().fromJson(elem, clazz));
+        }
+        return list;
     }
 }

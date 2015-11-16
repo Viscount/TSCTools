@@ -8,5 +8,7 @@ import java.util.Map;
 public class TimeWindow {
 
     private long id;
+    private double startTime, endTime;
     private Map<String,Vector> userFeature;
+
 }

@@ -6,6 +6,7 @@ import entity.Word;
 import org.dom4j.Document;
 import util.JsonUtil;
 import util.LtpCloudUtil;
+import util.NoiseWiper;
 import util.XMLUtil;
 
 import java.util.Collections;
@@ -23,7 +24,14 @@ public class DanmakuAnalysis {
         Global.init();
         for ( Danmaku danmaku : danmakuList ){
             if ( !Global.userID.contains(danmaku.getSenderId()) ) Global.userID.add(danmaku.getSenderId());
-            List<Word> contentWords = LtpCloudUtil.parseText(danmaku.getContent());
+            System.out.println("Danmaku ID : "+danmaku.getId() + " start parsing...");
+
+            String modifiedContent = NoiseWiper.replace(danmaku.getContent());
+            modifiedContent = modifiedContent.trim();
+            if (( modifiedContent == null ) ||  ( modifiedContent.length() <= 0)) continue;
+
+            List<Word> contentWords = LtpCloudUtil.parseText( modifiedContent );
+
             for ( Word word : contentWords ){
                 if ( !Global.words.containsKey(word.getCont()) ) Global.words.put(word.getCont(),1L);
                 else {
@@ -36,7 +44,7 @@ public class DanmakuAnalysis {
     }
 
     public static void main(String[] args){
-        Document xml = XMLUtil.readXML("D:\\Develop\\workspace\\TSCTools\\data\\movie\\2065063.xml");
+        Document xml = XMLUtil.readXML(".\\data\\movie\\2065063.xml");
         List<Danmaku> danmakuList = XMLUtil.extractFromFile(xml);
         Collections.sort(danmakuList);
         extractCollection(danmakuList);
