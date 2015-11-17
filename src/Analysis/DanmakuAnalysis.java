@@ -2,11 +2,13 @@ package analysis;
 
 import collection.Global;
 import entity.Danmaku;
+import entity.Matrix;
 import entity.TimeWindow;
 import entity.Word;
 import org.dom4j.Document;
 import util.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -64,6 +66,13 @@ public class DanmakuAnalysis {
         Document xml = XMLUtil.readXML(".\\data\\movie\\2065063.xml");
         List<Danmaku> danmakuList = XMLUtil.extractFromFile(xml);
         Collections.sort(danmakuList);
+        Global.init();
+        Global.userID = new ExtractUtil(danmakuList).extractUser();
         List<TimeWindow> timeWindowList = new WindowBuilder(WINDOW_SIZE,WINDOW_SLIDE_STEP).buildWindows(danmakuList);
+        List<Matrix> matrixList = new ArrayList<Matrix>();
+        for ( TimeWindow timeWindow : timeWindowList ){
+            Matrix matrix = new Matrix(timeWindow);
+            matrixList.add(matrix);
+        }
     }
 }

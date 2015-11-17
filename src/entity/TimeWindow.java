@@ -45,9 +45,12 @@ public class TimeWindow {
         this.endTime = endTime;
     }
 
+    public Map<String, Vector> getUserFeature() {
+        return userFeature;
+    }
+
     public void buildFromDanmaku(List<Danmaku> danmakuList){
-        ExtractUtil extractUtil = new ExtractUtil();
-        extractUtil.setDanmakuList(danmakuList);
+        ExtractUtil extractUtil = new ExtractUtil(danmakuList);
         List<String> userIDList = extractUtil.extractUser();
         for ( String s : userIDList ){
             Map<String,Long> userWords = extractUtil.extractWords(s);

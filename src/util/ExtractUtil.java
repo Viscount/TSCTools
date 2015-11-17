@@ -16,6 +16,10 @@ public class ExtractUtil {
     private List<String> userID;
     private List<Danmaku> danmakuList;
 
+    public ExtractUtil(List<Danmaku> danmakuList){
+        this.danmakuList = danmakuList;
+    }
+
     public List<String> extractUser(){
         for ( Danmaku danmaku : danmakuList ){
             if ( !userID.contains(danmaku.getSenderId()) ) userID.add(danmaku.getSenderId());

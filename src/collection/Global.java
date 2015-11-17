@@ -25,6 +25,10 @@ public class Global {
         words = new HashMap<String,Long>();
     }
 
+    public static int getUserIndex(String userID){
+        return userID.indexOf(userID);
+    }
+
     public static void output(){
         try {
             File userFile = new File(USER_FILE_PATH);
