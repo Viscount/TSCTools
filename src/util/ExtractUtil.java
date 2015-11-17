@@ -18,6 +18,7 @@ public class ExtractUtil {
 
     public ExtractUtil(List<Danmaku> danmakuList){
         this.danmakuList = danmakuList;
+        this.userID = new ArrayList<String>();
     }
 
     public List<String> extractUser(){
@@ -29,11 +30,25 @@ public class ExtractUtil {
 
     public Map<String,Long> extractWords( String userID){
         String content = "";
+        String danmakuPersistID = "";
         Map<String,Long> wordsCount = new HashMap<String,Long>();
         for ( Danmaku danmaku : danmakuList ){
-            if( danmaku.getSenderId().equals(userID) ) content += danmaku.getContent();
+            if( danmaku.getSenderId().equals(userID) ){
+                content += danmaku.getContent();
+                danmakuPersistID += danmaku.getId();
+            }
         }
-        List<Word> wordList = new LtpCloudUtil().parseText(content);
+
+        String modifiedContent = NoiseWiper.replace(content);
+        modifiedContent = modifiedContent.trim();
+        if (modifiedContent.length()<=0) return null;
+
+        List<Word> wordList;
+        if ( PersistenceUtil.checkExist(danmakuPersistID) ) wordList = PersistenceUtil.read(danmakuPersistID);
+        else {
+            wordList = new LtpCloudUtil().parseText(modifiedContent);
+            PersistenceUtil.persist(danmakuPersistID,JsonUtil.toJson(wordList));
+        }
         for ( Word word : wordList ){
             if ( !wordsCount.containsKey(word.getCont()) ) wordsCount.put(word.getCont(),1L);
             else {

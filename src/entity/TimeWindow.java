@@ -54,6 +54,7 @@ public class TimeWindow {
         List<String> userIDList = extractUtil.extractUser();
         for ( String s : userIDList ){
             Map<String,Long> userWords = extractUtil.extractWords(s);
+            if ( userWords == null ) continue;
             Vector vector = new Vector(userWords);
             userFeature.put(s,vector);
         }

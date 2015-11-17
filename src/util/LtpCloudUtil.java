@@ -22,7 +22,6 @@ public class LtpCloudUtil {
     public List<Word> parseText( String text ){
         String rawJson = requestLtpCloud(text);
         String modifiedJson = convertToWordListJson(rawJson);
-        System.out.println(modifiedJson+"\n");
         List<Word> result = JsonUtil.toObjectList(modifiedJson, Word.class);
         return result;
     }
