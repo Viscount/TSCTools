@@ -5,8 +5,11 @@ package entity;
  */
 public class SRLItem {
     private long id;
+    // 角色名称
     private String type;
+    // 开始的词序号
     private long beg;
+    // 结束的序号
     private long end;
 
     public SRLItem(long id, String type, long beg, long end) {
