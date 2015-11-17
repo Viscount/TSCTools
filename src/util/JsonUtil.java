@@ -26,21 +26,13 @@ public class JsonUtil {
         return gson.toJson(obj);
     }
 
-    public static String getClassName(String json) throws Exception{
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = jsonParser.parse(json).getAsJsonObject();
-        JsonElement element = jsonObject.get("_class");
-        if ( element!= null) return element.getAsString();
-        return null;
-    }
-
     public static <T> T toObject(String json,Class<T> clazz) {
         return gson.fromJson(json,clazz);
     }
 
     public static <T> List<T> toObjectList(String json, Class<T> clazz){
         List<T> list = new ArrayList<T>();
-        JsonParser jsonParser = new JsonParser();
+//        JsonParser jsonParser = new JsonParser();
         JsonArray array = new JsonParser().parse(json).getAsJsonArray();
         for(final JsonElement elem : array){
             list.add(new Gson().fromJson(elem, clazz));

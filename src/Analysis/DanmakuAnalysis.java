@@ -20,9 +20,26 @@ public class DanmakuAnalysis {
     private static double WINDOW_SIZE = 30;
     private static double WINDOW_SLIDE_STEP = 10;
 
+    public static class Extractor extends Thread{
+        private List<Word> parseResult;
+        private String text;
+
+        public Extractor(String text){
+            this.text = text;
+        }
+        public void run(){
+            LtpCloudUtil ltpCloudUtil = new LtpCloudUtil();
+            parseResult = ltpCloudUtil.parseText(text);
+        }
+        public List<Word> getParseResult(){
+            return parseResult;
+        }
+    }
+
     public static void extractCollection( List<Danmaku> danmakuList ){
         Global.init();
-        for ( Danmaku danmaku : danmakuList ){
+        List<Danmaku> noDupDanmakuList = NoiseWiper.removeDuplicate(danmakuList);
+        for ( Danmaku danmaku : noDupDanmakuList ){
             if ( !Global.userID.contains(danmaku.getSenderId()) ) Global.userID.add(danmaku.getSenderId());
             System.out.println("Danmaku ID : "+danmaku.getId() + " start parsing...");
 
@@ -30,7 +47,9 @@ public class DanmakuAnalysis {
             modifiedContent = modifiedContent.trim();
             if (( modifiedContent == null ) ||  ( modifiedContent.length() <= 0)) continue;
 
-            List<Word> contentWords = LtpCloudUtil.parseText( modifiedContent );
+            Extractor extractor = new Extractor(modifiedContent);
+            extractor.run();
+            List<Word> contentWords = extractor.getParseResult();
 
             for ( Word word : contentWords ){
                 if ( !Global.words.containsKey(word.getCont()) ) Global.words.put(word.getCont(),1L);

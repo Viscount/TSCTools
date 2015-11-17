@@ -1,8 +1,8 @@
 package util;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import entity.Danmaku;
+
+import java.util.*;
 
 /**
  * Created by Jaric Liao on 2015/11/16.
@@ -17,5 +17,17 @@ public class NoiseWiper {
             rawContent = rawContent.replace(s," ");
         }
         return rawContent;
+    }
+
+    public static List<Danmaku> removeDuplicate( List<Danmaku> danmakuList ){
+        List<Danmaku> noDupList = new ArrayList<Danmaku>();
+        Danmaku lastDanmaku = null;
+        for ( Danmaku danmaku : danmakuList ){
+            if (( lastDanmaku == null ) || (!lastDanmaku.getSenderId().equals(danmaku.getSenderId())) || (!lastDanmaku.getContent().equals(danmaku.getContent()))) {
+                noDupList.add(danmaku);
+                lastDanmaku = danmaku;
+            }
+        }
+        return noDupList;
     }
 }

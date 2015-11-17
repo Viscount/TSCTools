@@ -19,14 +19,15 @@ public class LtpCloudUtil {
     private static String api_key = "Q5s0X4R6YHmLvHZk8umcqysY2xek5IyxjGrrDKZW";
     private static String api_url = "http://api.ltp-cloud.com/analysis/";
 
-    public static List<Word> parseText( String text ){
+    public List<Word> parseText( String text ){
         String rawJson = requestLtpCloud(text);
         String modifiedJson = convertToWordListJson(rawJson);
+        System.out.println(modifiedJson+"\n");
         List<Word> result = JsonUtil.toObjectList(modifiedJson, Word.class);
         return result;
     }
 
-    public static String requestLtpCloud( String text ){
+    public String requestLtpCloud( String text ){
         try {
             Thread.sleep(100);
             RequestParam requestParam = new RequestParam(api_key,text,"all","json");
@@ -56,7 +57,7 @@ public class LtpCloudUtil {
         return null;
     }
 
-    private static String buildURL(RequestParam requestParam){
+    private String buildURL(RequestParam requestParam){
         try{
             String resultURL = api_url;
             resultURL += "?";
@@ -71,7 +72,7 @@ public class LtpCloudUtil {
         return  null;
     }
 
-    private static String convertToWordListJson(String rawJson){
+    private String convertToWordListJson(String rawJson){
         int beginIndex = 0;
         int endIndex = rawJson.length();
         int countLeft = 0;
@@ -88,10 +89,10 @@ public class LtpCloudUtil {
         return modifiedJson.trim();
     }
 
-    public static void main(String[] args){
-        List<Word> response = LtpCloudUtil.parseText("工信处女干事每月经过下属科室都要亲口交代24口交换机等技术性器件的安装工作");
-        System.out.println(JsonUtil.toJson(response));
-    }
+//    public static void main(String[] args){
+//        List<Word> response = LtpCloudUtil.parseText("工信处女干事每月经过下属科室都要亲口交代24口交换机等技术性器件的安装工作");
+//        System.out.println(JsonUtil.toJson(response));
+//    }
 
 }
 
