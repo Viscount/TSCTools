@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class XMLUtil {
 
-    // 读取目标XML文件
+    // 璇诲彇鐩爣XML鏂囦欢
     public static Document readXML(String filepath){
         try {
             SAXReader reader = new SAXReader();
@@ -25,7 +25,7 @@ public class XMLUtil {
         return null;
     }
 
-    // 提取XML文件中的弹幕列表
+    // 鎻愬彇XML鏂囦欢涓殑寮瑰箷鍒楄〃
     public static List<Danmaku> extractFromFile(Document document){
         List<Danmaku> danmakuList = new ArrayList<Danmaku>();
         List<Element> elementList = document.getRootElement().elements("d");
@@ -33,6 +33,7 @@ public class XMLUtil {
             Danmaku danmaku = new Danmaku();
             String attributes = element.attribute("p").getValue();
             String content = element.getText();
+
             danmaku = DanmakuMapper.convert(attributes,content);
             danmakuList.add(danmaku);
         }

@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/.gitattributes" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/util/LtpCloudUtil.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/util/NoiseWiper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/util/XMLUtil.java" charset="UTF-8" />
   </component>
 </project>
