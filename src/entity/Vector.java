@@ -44,6 +44,6 @@ public class Vector {
             }
             else wordCount.put(word,count);
         }
-        return common*1.0/(v1.getSize()+v2.getSize());
+        return common * 1.0 / (v1.getSize()+v2.getSize());
     }
 }

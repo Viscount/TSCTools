@@ -25,8 +25,8 @@ public class Global {
         words = new HashMap<String,Long>();
     }
 
-    public static int getUserIndex(String userID){
-        return userID.indexOf(userID);
+    public static int getUserIndex(String userIDString){
+        return userID.indexOf(userIDString);
     }
 
     public static void output(){

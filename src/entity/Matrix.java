@@ -2,6 +2,8 @@ package entity;
 
 import collection.Global;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -21,9 +23,32 @@ public class Matrix {
                 String userID2 = entry2.getKey();
                 Vector vector1 = entry1.getValue();
                 Vector vector2 = entry2.getValue();
-                detail[Global.getUserIndex(userID1)][Global.getUserIndex(userID2)] = Vector.simularity(vector1,vector2);
-                detail[Global.getUserIndex(userID2)][Global.getUserIndex(userID1)] =  detail[Global.getUserIndex(userID1)][Global.getUserIndex(userID2)];
+                int rowID = Global.getUserIndex(userID1);
+                int lineID = Global.getUserIndex(userID2);
+                double simularity = Vector.simularity(vector1,vector2)*100;
+                detail[rowID][lineID] = simularity;
+                detail[lineID][rowID] = detail[rowID][lineID];
             }
         }
+    }
+
+    public void output(){
+        try {
+            int count = 0;
+            File file = new File("matrixExample.txt");
+            FileWriter fileWriter = new FileWriter(file);
+            for ( int i=0; i< Global.userID.size(); i++ ){
+                for ( int j=0; j< Global.userID.size(); j++){
+                    if ( detail[i][j] > 0 ) count++;
+                    fileWriter.write(Double.toString(detail[i][j])+", ");
+                }
+                fileWriter.write("\r\n");
+            }
+            fileWriter.write(Integer.toString(count));
+            fileWriter.close();
+        } catch ( Exception e ){
+            e.printStackTrace();
+        }
+
     }
 }

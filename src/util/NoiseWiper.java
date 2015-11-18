@@ -9,8 +9,8 @@ import java.util.*;
  */
 public class NoiseWiper {
 
-    private static Set<String> punctuation = new HashSet<String>(Arrays.asList(",",".","!","?","/","\\",":",";","...","=","-","←","#","@","$","%","`","*","&",
-                                                                            "，","。","！","？","/","：","；","。。。","……"));
+    private static Set<String> punctuation = new HashSet<String>(Arrays.asList(",",".","!","?","/","\\",":",";","...","=","-","←","#","@","$","%","`","*","&","(",")",
+                                                                            "，","。","！","？","/","：","；","。。。","……","（","）"));
 
     public static String replace( String rawContent ){
         for ( String s : punctuation ){

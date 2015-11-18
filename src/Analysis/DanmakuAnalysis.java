@@ -72,7 +72,7 @@ public class DanmakuAnalysis {
         List<Matrix> matrixList = new ArrayList<Matrix>();
         for ( TimeWindow timeWindow : timeWindowList ){
             Matrix matrix = new Matrix(timeWindow);
-            matrixList.add(matrix);
+            matrix.output();
         }
     }
 }
