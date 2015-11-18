@@ -24,7 +24,6 @@ public class WindowBuilder {
         double currentWindowStart = 0;
         double currentWindowEnd = currentWindowStart + windowSize;
         List<TimeWindow> result = new ArrayList<TimeWindow>();
-        sortedList.remove(sortedList.size()-1);
         while( sortedList.size() > 0 ){
             List<Danmaku> currentList = new ArrayList<Danmaku>();
             for ( Danmaku danmaku : sortedList ){
