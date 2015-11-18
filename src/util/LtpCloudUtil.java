@@ -36,6 +36,10 @@ public class LtpCloudUtil {
             httpConnection.setRequestProperty("Accept", "application/json");
             httpConnection.setRequestProperty("Charset", "UTF-8");
 
+            if ( httpConnection.getInputStream().available() == 0 ) {
+                httpConnection.disconnect();
+                throw new Exception("No response");
+            }
             if (httpConnection.getResponseCode() != 200) {
                 throw new RuntimeException("HTTP GET Request Failed with Error code : "
                         + httpConnection.getResponseCode());
