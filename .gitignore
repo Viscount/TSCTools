@@ -45,3 +45,6 @@ Temporary Items
 
 *.txt
 *.parse
+
+out/
+.idea/
