@@ -32,10 +32,10 @@ public class Matrix {
         }
     }
 
-    public void output(){
+    public void output(int matrixId){
         try {
             int count = 0;
-            File file = new File("matrixExample.txt");
+            File file = new File("\\matrix\\matrixExample"+matrixId+".txt");
             FileWriter fileWriter = new FileWriter(file);
             for ( int i=0; i< Global.userID.size(); i++ ){
                 for ( int j=0; j< Global.userID.size(); j++){
