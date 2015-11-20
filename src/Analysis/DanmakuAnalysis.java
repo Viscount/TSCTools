@@ -26,6 +26,7 @@ public class DanmakuAnalysis {
         Collections.sort(danmakuList);
         Global.init();
         Global.userID = new ExtractUtil(danmakuList).extractUser();
+        NoiseWiper.dict_init();
         List<TimeWindow> timeWindowList = new WindowBuilder(WINDOW_SIZE,WINDOW_SLIDE_STEP).buildWindows(danmakuList);
         List<Matrix> matrixList = new ArrayList<Matrix>();
         int matrixId = 0;

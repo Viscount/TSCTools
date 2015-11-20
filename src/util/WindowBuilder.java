@@ -33,6 +33,8 @@ public class WindowBuilder {
                 else break;
             }
 
+            System.out.println("Building window " + idCount + "...");
+
             TimeWindow timeWindow = new TimeWindow(idCount,currentWindowStart,currentWindowEnd);
             idCount++;
             timeWindow.buildFromDanmaku(currentList);

@@ -50,6 +50,8 @@ public class ExtractUtil {
             PersistenceUtil.persist(danmakuPersistID,JsonUtil.toJson(wordList));
         }
         for ( Word word : wordList ){
+            if ( !word.getCont().equals(NoiseWiper.merge(word)))
+                word.setCont(NoiseWiper.merge(word));
             if ( !wordsCount.containsKey(word.getCont()) ) wordsCount.put(word.getCont(),1L);
             else {
                 long count = wordsCount.get(word.getCont());

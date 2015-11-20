@@ -1,0 +1,14 @@
+[
+	{
+		"mode":"RE",
+		"pattern":"233+",
+		"wordsList":[],
+		"mergeTo":"233"
+	},
+	{
+		"mode":"WL",
+		"pattern":"",
+		"wordsList":["楚萌"],
+		"mergeTo":"楚门"
+	}
+]
