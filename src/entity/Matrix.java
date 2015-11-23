@@ -32,15 +32,18 @@ public class Matrix {
         }
     }
 
-    public void output(int matrixId){
+    public void output(int matrixId, String split){
         try {
             int count = 0;
-            File file = new File("\\matrix\\matrixExample"+matrixId+".txt");
+            File file = new File(".\\matrix\\matrixExample"+matrixId+".txt");
             FileWriter fileWriter = new FileWriter(file);
             for ( int i=0; i< Global.userID.size(); i++ ){
                 for ( int j=0; j< Global.userID.size(); j++){
-                    if ( detail[i][j] > 0 ) count++;
-                    fileWriter.write(Double.toString(detail[i][j])+", ");
+                    if ( detail[i][j] > 0 ) {
+                        count++;
+                        fileWriter.write(Double.toString(detail[i][j])+split);
+                    }
+                    else fileWriter.write("0"+split);
                 }
                 fileWriter.write("\r\n");
             }

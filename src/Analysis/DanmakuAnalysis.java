@@ -32,7 +32,7 @@ public class DanmakuAnalysis {
         int matrixId = 0;
         for ( TimeWindow timeWindow : timeWindowList ){
             Matrix matrix = new Matrix(timeWindow);
-            matrix.output(matrixId);
+            matrix.output(matrixId," ");
             matrixId++;
         }
     }

@@ -34,7 +34,7 @@ public class ExtractUtil {
         Map<String,Long> wordsCount = new HashMap<String,Long>();
         for ( Danmaku danmaku : danmakuList ){
             if( danmaku.getSenderId().equals(userID) ){
-                content += danmaku.getContent();
+                content = content + " " +danmaku.getContent();
                 danmakuPersistID += danmaku.getId();
             }
         }
