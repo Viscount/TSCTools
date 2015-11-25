@@ -47,7 +47,6 @@ public class Matrix {
                 }
                 fileWriter.write("\r\n");
             }
-            fileWriter.write(Integer.toString(count));
             fileWriter.close();
         } catch ( Exception e ){
             e.printStackTrace();
