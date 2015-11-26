@@ -18,5 +18,5 @@ for (i in (WindowSize+1):CmatrixNum ){
     rt = rt + eigenArray[,j]
   }
   rt = rt / WindowSize
-  zArray[i] = ut %*% rt
+  zArray[i] = 1 - ut %*% rt/norm(as.matrix(ut),"f")/norm(as.matrix(rt),"f")
 }
