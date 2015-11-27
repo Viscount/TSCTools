@@ -28,7 +28,11 @@ public class ExtractUtil {
         return userID;
     }
 
-    public Map<String,Long> extractWords( String userID){
+    public void extractWords(){
+        
+    }
+
+    public Map<String,Long> extractWords( String userID ){
         String content = "";
         String danmakuPersistID = "";
         Map<String,Long> wordsCount = new HashMap<String,Long>();

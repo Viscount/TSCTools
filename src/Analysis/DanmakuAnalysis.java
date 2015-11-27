@@ -21,19 +21,31 @@ public class DanmakuAnalysis {
     private static double WINDOW_SLIDE_STEP = 10;
 
     public static void main(String[] args){
-        Document xml = XMLUtil.readXML(".\\data\\movie\\2065063.xml");
+        Document xml = XMLUtil.readXML(".\\data\\movie\\zimu.xml");
         List<Danmaku> danmakuList = XMLUtil.extractFromFile(xml);
         Collections.sort(danmakuList);
         Global.init();
-        Global.userID = new ExtractUtil(danmakuList).extractUser();
-        NoiseWiper.dict_init();
-        List<TimeWindow> timeWindowList = new WindowBuilder(WINDOW_SIZE,WINDOW_SLIDE_STEP).buildWindows(danmakuList);
-        List<Matrix> matrixList = new ArrayList<Matrix>();
-        int matrixId = 0;
-        for ( TimeWindow timeWindow : timeWindowList ){
-            Matrix matrix = new Matrix(timeWindow);
-            matrix.output(matrixId," ");
-            matrixId++;
+        for ( Danmaku danmaku : danmakuList ){
+            String content = danmaku.getContent();
+            String danmakuPersistID = Long.toString(danmaku.getId());
+            String modifiedContent = NoiseWiper.replace(content);
+            modifiedContent = modifiedContent.trim();
+            if (modifiedContent.length()<=0) continue;
+            if ( !PersistenceUtil.checkExist(danmakuPersistID) ) {
+                List<Word> wordList = new LtpCloudUtil().parseText(modifiedContent);
+                PersistenceUtil.persist(danmakuPersistID, JsonUtil.toJson(wordList));
+            }
         }
+
+//        Global.userID = new ExtractUtil(danmakuList).extractUser();
+//        NoiseWiper.dict_init();
+//        List<TimeWindow> timeWindowList = new WindowBuilder(WINDOW_SIZE,WINDOW_SLIDE_STEP).buildWindows(danmakuList);
+//        List<Matrix> matrixList = new ArrayList<Matrix>();
+//        int matrixId = 0;
+//        for ( TimeWindow timeWindow : timeWindowList ){
+//            Matrix matrix = new Matrix(timeWindow);
+//            matrix.output(matrixId," ");
+//            matrixId++;
+//        }
     }
 }
