@@ -25,17 +25,12 @@ public class DanmakuAnalysis {
         List<Danmaku> danmakuList = XMLUtil.extractFromFile(xml);
         Collections.sort(danmakuList);
         Global.init();
-        for ( Danmaku danmaku : danmakuList ){
-            String content = danmaku.getContent();
-            String danmakuPersistID = Long.toString(danmaku.getId());
-            String modifiedContent = NoiseWiper.replace(content);
-            modifiedContent = modifiedContent.trim();
-            if (modifiedContent.length()<=0) continue;
-            if ( !PersistenceUtil.checkExist(danmakuPersistID) ) {
-                List<Word> wordList = new LtpCloudUtil().parseText(modifiedContent);
-                PersistenceUtil.persist(danmakuPersistID, JsonUtil.toJson(wordList));
-            }
-        }
+        System.setProperty("sun.net.client.defaultConnectTimeout", String
+                .valueOf(10000));// （单位：毫秒）
+        System.setProperty("sun.net.client.defaultReadTimeout", String
+                .valueOf(10000)); // （单位：毫秒）
+        ExtractUtil extractUtil = new ExtractUtil(danmakuList);
+        extractUtil.persistParsedWords();
 
 //        Global.userID = new ExtractUtil(danmakuList).extractUser();
 //        NoiseWiper.dict_init();

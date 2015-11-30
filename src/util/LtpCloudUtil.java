@@ -18,6 +18,7 @@ public class LtpCloudUtil {
 
     private static String api_key = "Q5s0X4R6YHmLvHZk8umcqysY2xek5IyxjGrrDKZW";
     private static String api_url = "http://api.ltp-cloud.com/analysis/";
+    private static long TIME_STEP = 2000;
 
     public List<Word> parseText( String text ){
         String rawJson = requestLtpCloud(text);
@@ -28,7 +29,7 @@ public class LtpCloudUtil {
 
     public String requestLtpCloud( String text ){
         try {
-            Thread.sleep(100);
+            Thread.sleep(TIME_STEP);
             RequestParam requestParam = new RequestParam(api_key,text,"all","json");
             URL restServiceURL = new URL(buildURL(requestParam));
             HttpURLConnection httpConnection = (HttpURLConnection) restServiceURL.openConnection();

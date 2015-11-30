@@ -17,8 +17,8 @@ import java.util.regex.Pattern;
  */
 public class NoiseWiper {
 
-    private static Set<String> punctuation = new HashSet<String>(Arrays.asList(",",".","!","?","/","\\",":",";","...","=","-","←","#","@","$","%","`","*","&","(",")",
-                                                                            "，","。","！","？","/","：","；","。。。","……","（","）"));
+    private static Set<String> punctuation = new HashSet<String>(Arrays.asList(",",".","!","?","/","\\",":",";","...","=","-","←","#","@","$","%","`","*","&","(",")","\"",
+                                                                            "，","。","！","？","/","：","；","。。。","……","（","）","“","”","‘","’"));
     private static String DICTIONARY_PATH = ".//data//dict.json";
     private static List<DictionaryItem> dictionary;
 

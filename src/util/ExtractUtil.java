@@ -28,8 +28,18 @@ public class ExtractUtil {
         return userID;
     }
 
-    public void extractWords(){
-        
+    public void persistParsedWords(){
+        for ( Danmaku danmaku : danmakuList ){
+            String content = danmaku.getContent();
+            String danmakuPersistID = Long.toString(danmaku.getId());
+            String modifiedContent = NoiseWiper.replace(content);
+            modifiedContent = modifiedContent.trim();
+            if (modifiedContent.length()<=0) continue;
+            if ( !PersistenceUtil.checkExist(danmakuPersistID) ) {
+                List<Word> wordList = new LtpCloudUtil().parseText(modifiedContent);
+                PersistenceUtil.persist(danmakuPersistID, JsonUtil.toJson(wordList));
+            }
+        }
     }
 
     public Map<String,Long> extractWords( String userID ){
