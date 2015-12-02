@@ -9,7 +9,7 @@ for (i in 1:CmatrixNum){
   eigenResult = eigen(matrix)
   eigenValue = eigenResult$values
   eigenVector = eigenResult$vectors
-  eigenArray[,i] = eigenVector[,1]
+  eigenArray[,i] = abs(eigenVector[,1])
 }
 for (i in (WindowSize+1):CmatrixNum ){
   ut = eigenArray[,i]
