@@ -13,7 +13,8 @@ public class FileUtil {
         try {
             File file = new File(fileName);
             FileWriter fileWriter = new FileWriter(file);
-            for (Object d : collection) fileWriter.write(d + ", ");
+            for (Object d : collection) fileWriter.write(d + " ");
+            fileWriter.write("\n\r");
             fileWriter.close();
         }catch (Exception e){
             e.printStackTrace();
