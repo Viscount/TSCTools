@@ -17,8 +17,9 @@ import java.util.regex.Pattern;
  */
 public class NoiseWiper {
 
-    private static Set<String> punctuation = new HashSet<String>(Arrays.asList(",",".","!","?","/","\\",":",";","...","=","-","←","#","@","$","%","`","*","&","(",")","\"",
+    private static Set<String> punctuation = new HashSet<String>(Arrays.asList(",",".","!","?","/","\\",":",";","...","=","-","←","#","@","$","%","`","*","&","(",")","\"","+",
                                                                             "，","。","！","？","/","：","；","。。。","……","（","）","“","”","‘","’"));
+    private static Set<String> wordType = new HashSet(Arrays.asList("c","e","g","h","p","q","u","wp","x"));
     private static String DICTIONARY_PATH = ".//data//dict.json";
     private static List<DictionaryItem> dictionary;
 
@@ -65,5 +66,10 @@ public class NoiseWiper {
             }
         }
         return content;
+    }
+
+    public static boolean wipeWordType(Word word){
+        if ( wordType.contains(word.getPos())) return true;
+        else return false;
     }
 }

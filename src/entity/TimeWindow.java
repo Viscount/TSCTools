@@ -1,7 +1,10 @@
 package entity;
 
 import util.ExtractUtil;
+import util.JsonUtil;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +20,7 @@ public class TimeWindow {
     private double averageLength;
     private Map<String,Vector> userFeature;
 
-    public TimeWindow(long id, double endTime, double startTime) {
+    public TimeWindow(long id, double startTime, double endTime) {
         this.id = id;
         this.endTime = endTime;
         this.startTime = startTime;
@@ -77,6 +80,17 @@ public class TimeWindow {
             if ( userWords == null ) continue;
             Vector vector = new Vector(userWords);
             userFeature.put(s,vector);
+        }
+    }
+
+    public void output(){
+        try {
+            File file = new File(".\\window\\Window" + id + ".txt");
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(JsonUtil.toJson(this));
+            fileWriter.close();
+        } catch ( Exception e){
+            e.printStackTrace();
         }
     }
 }

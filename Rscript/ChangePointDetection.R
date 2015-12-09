@@ -1,5 +1,5 @@
-n = 1544
-CmatrixNum = 853
+n = 2497
+CmatrixNum = 618
 WindowSize = 3
 eigenArray = array(0,dim = c(n,CmatrixNum))
 zArray = array(0,dim = CmatrixNum)
@@ -10,6 +10,7 @@ for (i in 1:CmatrixNum){
   eigenValue = eigenResult$values
   eigenVector = eigenResult$vectors
   eigenArray[,i] = abs(eigenVector[,1])
+  cat("Matrix ",i-1, " done.")
 }
 for (i in (WindowSize+1):CmatrixNum ){
   ut = eigenArray[,i]
