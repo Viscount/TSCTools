@@ -25,13 +25,6 @@ public class DanmakuAnalysis {
         List<Danmaku> danmakuList = XMLUtil.extractFromFile(xml);
         Collections.sort(danmakuList);
         Global.init();
-        System.setProperty("sun.net.client.defaultConnectTimeout", String
-                .valueOf(10000));// （单位：毫秒）
-        System.setProperty("sun.net.client.defaultReadTimeout", String
-                .valueOf(10000)); // （单位：毫秒）
-//        ExtractUtil extractUtil = new ExtractUtil(danmakuList);
-//        extractUtil.persistParsedWords();
-
         Global.userID = new ExtractUtil(danmakuList).extractUser();
         NoiseWiper.dict_init();
         List<TimeWindow> timeWindowList = new WindowBuilder(WINDOW_SIZE,WINDOW_SLIDE_STEP).buildWindows(danmakuList);

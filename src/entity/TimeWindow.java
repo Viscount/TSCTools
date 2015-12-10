@@ -27,6 +27,15 @@ public class TimeWindow {
         userFeature = new HashMap<String, Vector>();
     }
 
+    public TimeWindow(long id, List<TimeWindow> timeWindowList){
+        this.id = id;
+        Map<String,Vector> userFeatureMerge = new HashMap<String,Vector>();
+        for ( TimeWindow timeWindow : timeWindowList ){
+            Map<String, Vector> userFeatureOld = timeWindow.getUserFeature();
+
+        }
+    }
+
     public long getId() {
         return id;
     }
