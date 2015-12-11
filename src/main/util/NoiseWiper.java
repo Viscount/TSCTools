@@ -1,8 +1,7 @@
-package util;
+package main.util;
 
-import entity.Danmaku;
-import entity.DictionaryItem;
-import entity.Word;
+import main.entity.DictionaryItem;
+import main.entity.Word;
 
 import java.io.BufferedReader;
 import java.io.File;

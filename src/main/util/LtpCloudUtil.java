@@ -1,11 +1,10 @@
-package util;
+package main.util;
 
-import entity.RequestParam;
-import entity.Word;
+import main.entity.RequestParam;
+import main.entity.Word;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;

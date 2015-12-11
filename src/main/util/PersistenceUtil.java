@@ -1,6 +1,6 @@
-package util;
+package main.util;
 
-import entity.Word;
+import main.entity.Word;
 
 import java.io.*;
 import java.util.List;

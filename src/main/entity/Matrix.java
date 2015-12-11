@@ -1,10 +1,9 @@
-package entity;
+package main.entity;
 
-import collection.Global;
+import main.collection.Global;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Iterator;
 import java.util.Map;
 
 /**

@@ -1,6 +1,6 @@
-package util;
+package main.util;
 
-import entity.Danmaku;
+import main.entity.Danmaku;
 
 /**
  * Created by TongjiSSE on 2015/11/12.

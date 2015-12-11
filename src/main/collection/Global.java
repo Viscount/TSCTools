@@ -1,6 +1,6 @@
-package collection;
+package main.collection;
 
-import util.JsonUtil;
+import main.util.JsonUtil;
 
 import java.io.File;
 import java.io.FileWriter;

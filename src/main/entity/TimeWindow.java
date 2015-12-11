@@ -1,7 +1,7 @@
-package entity;
+package main.entity;
 
-import util.ExtractUtil;
-import util.JsonUtil;
+import main.util.JsonUtil;
+import main.util.ExtractUtil;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -42,6 +42,7 @@ public class TimeWindow {
                 else userFeatureMerge.put(userID,userVec);
             }
         }
+        this.userFeature = userFeatureMerge;
     }
 
     public long getId() {

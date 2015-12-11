@@ -1,7 +1,7 @@
-package util;
+package main.util;
 
-import entity.Danmaku;
-import entity.TimeWindow;
+import main.entity.Danmaku;
+import main.entity.TimeWindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,7 @@ public class WindowBuilder {
                 candidateClip.add(timeWindowsClip.get(i+j));
             }
             TimeWindow timeWindow = new TimeWindow(idCount,candidateClip);
+            result.add(timeWindow);
         }
         return result;
     }

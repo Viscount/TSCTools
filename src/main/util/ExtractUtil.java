@@ -1,7 +1,7 @@
-package util;
+package main.util;
 
-import entity.Danmaku;
-import entity.Word;
+import main.entity.Danmaku;
+import main.entity.Word;
 
 import java.util.ArrayList;
 import java.util.HashMap;
