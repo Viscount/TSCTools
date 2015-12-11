@@ -32,7 +32,15 @@ public class TimeWindow {
         Map<String,Vector> userFeatureMerge = new HashMap<String,Vector>();
         for ( TimeWindow timeWindow : timeWindowList ){
             Map<String, Vector> userFeatureOld = timeWindow.getUserFeature();
-
+            for ( Map.Entry<String, Vector> entry : userFeatureOld.entrySet() ){
+                String userID = entry.getKey();
+                Vector userVec = entry.getValue();
+                if ( userFeatureMerge.containsKey(userID) ){
+                    Vector oldUserVec = userFeatureMerge.get(userID);
+                    userFeatureMerge.put(userID,Vector.merge(oldUserVec,userVec));
+                }
+                else userFeatureMerge.put(userID,userVec);
+            }
         }
     }
 

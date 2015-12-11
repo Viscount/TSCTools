@@ -27,21 +27,17 @@ public class DanmakuAnalysis {
         Global.init();
         Global.userID = new ExtractUtil(danmakuList).extractUser();
         NoiseWiper.dict_init();
-        List<TimeWindow> timeWindowList = new WindowBuilder(WINDOW_SIZE,WINDOW_SLIDE_STEP).buildWindows(danmakuList);
-        List<Matrix> matrixList = new ArrayList<Matrix>();
+        List<TimeWindow> timeWindowClipList = new WindowBuilder(WINDOW_SLIDE_STEP,WINDOW_SLIDE_STEP).buildWindows(danmakuList);
         List userAlive = new ArrayList();
         List numOfDanmaku = new ArrayList();
         List averageLength = new ArrayList();
         int matrixId = 0;
-        for ( TimeWindow timeWindow : timeWindowList ){
-            timeWindow.output();
-            Matrix matrix = new Matrix(timeWindow);
-            matrix.output(matrixId," ");
-            matrixId++;
+        for ( TimeWindow timeWindow : timeWindowClipList ){
             userAlive.add(timeWindow.getUserAlive());
             numOfDanmaku.add(timeWindow.getNumOfDanmaku());
             averageLength.add(timeWindow.getAverageLength());
         }
+
         FileUtil.output2File(userAlive,"userAlive.txt");
         FileUtil.output2File(numOfDanmaku,"numOfDanmaku.txt");
         FileUtil.output2File(averageLength,"averageLength.txt");

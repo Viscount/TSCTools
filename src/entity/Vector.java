@@ -46,4 +46,20 @@ public class Vector {
         }
         return common * 1.0 / (v1.getSize()+v2.getSize());
     }
+
+    public static Vector merge( Vector v1, Vector v2){
+        Map<String,Long> vectorCount = new HashMap<String,Long>();
+        vectorCount.putAll(v1.getDetail());
+        for ( Map.Entry<String,Long> entry : v2.getDetail().entrySet() ){
+            String word = entry.getKey();
+            Long count = entry.getValue();
+            if ( vectorCount.containsKey(word) ){
+                Long oldCount = vectorCount.get(word);
+                vectorCount.put(word,oldCount+count);
+            }
+            else vectorCount.put(word,count);
+        }
+        Vector vector = new Vector(vectorCount);
+        return vector;
+    }
 }

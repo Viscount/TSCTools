@@ -13,10 +13,28 @@ public class WindowBuilder {
 
     private double windowSize;
     private double windSlideStep;
+    private int clipSize;
 
     public WindowBuilder(double window_size, double window_slide_step){
         this.windowSize = window_size;
         this.windSlideStep = window_slide_step;
+    }
+
+    public void setClipSize(int n){
+        this.clipSize = n;
+    }
+
+    public List<TimeWindow> buildWindowsFromClip(List<TimeWindow> timeWindowsClip){
+        long idCount = 0;
+        List<TimeWindow> result = new ArrayList<TimeWindow>();
+        for ( int i=0; i<timeWindowsClip.size()-clipSize; i++){
+            List<TimeWindow> candidateClip = new ArrayList<TimeWindow>();
+            for (int j=0; j<clipSize; j++){
+                candidateClip.add(timeWindowsClip.get(i+j));
+            }
+            TimeWindow timeWindow = new TimeWindow(idCount,candidateClip);
+        }
+        return result;
     }
 
     public List<TimeWindow> buildWindows(List<Danmaku> sortedList){
