@@ -1,16 +1,21 @@
-n = 2497
+n = 1544
+Cmatrix = 853
 WindowSize = 3
-num = 50
-zArrayRank = rank(zArray)
+num = 20
+zArraywithPos = array(0,dim=c(CmatrixNum,2))
+for ( i in 1:CmatrixNum){
+  zArraywithPos[i,]=c(i,zArrayNew[i])
+}
+zArraywithPos = zArraywithPos[order(zArraywithPos[,2]),]
+
 start = 3;
-pos = array(0,dim = num)
 utTotal = array(0,dim = n)
 rtTotal = array(0,dim = n)
 for ( i in 1:num ){
-  pos[i] = match(start+i,zArrayRank)
-  ut = eigenArray[,pos[i]]
+  pos = zArraywithPos[start+i,1]
+  ut = eigenArray[,pos]
   rt = 0;
-  for (j in (pos[i]-WindowSize):(pos[i]-1)){
+  for (j in (pos-WindowSize):(pos-1)){
     rt = rt + eigenArray[,j]
   }
   rt = rt / WindowSize
