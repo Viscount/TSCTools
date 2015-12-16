@@ -9,8 +9,8 @@ for ( i in 1:CmatrixNum){
 zArraywithPos = zArraywithPos[order(zArraywithPos[,2]),]
 
 start = 3;
-utTotal = array(0,dim = n)
-rtTotal = array(0,dim = n)
+utTotal = 0
+rtTotal = 0
 for ( i in 1:num ){
   pos = zArraywithPos[start+i,1]
   ut = eigenArray[,pos]
@@ -19,6 +19,8 @@ for ( i in 1:num ){
     rt = rt + eigenArray[,j]
   }
   rt = rt / WindowSize
+  ut = ut/norm(as.matrix(ut),"f")
+  rt = rt/norm(as.matrix(rt),"f")
   utTotal = c(utTotal,ut)
   rtTotal = c(rtTotal,rt)
 }
