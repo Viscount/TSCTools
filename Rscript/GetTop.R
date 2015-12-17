@@ -19,6 +19,8 @@ for ( i in 1:num ){
     rt = rt + eigenArray[,j]
   }
   rt = rt / WindowSize
+  ut = ut/norm(as.matrix(ut),"f")
+  rt = rt/norm(as.matrix(rt),"f")
   utTotal = c(utTotal,ut)
   rtTotal = c(rtTotal,rt)
 }
