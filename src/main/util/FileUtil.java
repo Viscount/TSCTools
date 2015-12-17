@@ -9,6 +9,14 @@ import java.util.List;
  */
 public class FileUtil {
 
+    public static String generateAnimationFileName( String name, int episode){
+        String result = name;
+        String suffix = ".xml";
+        if ( episode < 10 ) result = result + "0" + episode;
+        else result = result + episode;
+        return result + suffix;
+    }
+
     public static void output2File(List collection, String fileName){
         try {
             File file = new File(fileName);
