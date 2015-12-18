@@ -20,6 +20,10 @@ public class WindowBuilder {
         this.windSlideStep = window_slide_step;
     }
 
+    public WindowBuilder(int clipSize){
+        this.clipSize = clipSize;
+    }
+
     public void setClipSize(int n){
         this.clipSize = n;
     }
