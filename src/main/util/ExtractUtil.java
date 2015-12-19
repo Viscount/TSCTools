@@ -77,6 +77,39 @@ public class ExtractUtil {
         return wordsCount;
     }
 
+    public Map<String,Long> extractUserWords( String userID ){
+        Map<String,Long> wordsCount = new HashMap<String,Long>();
+        for ( Danmaku danmaku : danmakuList ){
+            if ( danmaku.getSenderId().equals(userID)){
+                String content = danmaku.getContent();
+                String danmakuPersistID = Long.toString(danmaku.getId());
+
+                String modifiedContent = NoiseWiper.replace(content);
+                modifiedContent = modifiedContent.trim();
+                if (modifiedContent.length()<=0) return null;
+
+                List<Word> wordList;
+                System.out.println("Danmuku "+danmakuPersistID+" is processing...");
+                if ( PersistenceUtil.checkExist(danmakuPersistID) ) wordList = PersistenceUtil.read(danmakuPersistID);
+                else {
+                    wordList = new LtpCloudUtil().parseText(modifiedContent);
+                    PersistenceUtil.persist(danmakuPersistID,JsonUtil.toJson(wordList));
+                }
+                for ( Word word : wordList ){
+                    if ( !word.getCont().equals(NoiseWiper.merge(word)))
+                        word.setCont(NoiseWiper.merge(word));
+                    if ( NoiseWiper.wipeWordType(word) ) continue;
+                    if ( !wordsCount.containsKey(word.getCont()) ) wordsCount.put(word.getCont(),1L);
+                    else {
+                        long count = wordsCount.get(word.getCont());
+                        wordsCount.put(word.getCont(),count+1);
+                    }
+                }
+            }
+        }
+        return wordsCount;
+    }
+
     public void setDanmakuList(List<Danmaku> danmakuList) {
         this.danmakuList = danmakuList;
     }
