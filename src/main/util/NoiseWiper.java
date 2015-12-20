@@ -21,12 +21,23 @@ public class NoiseWiper {
     private static Set<String> wordType = new HashSet(Arrays.asList("c","e","g","h","p","q","u","wp","x"));
     private static String DICTIONARY_PATH = ".//data//dict.json";
     private static List<DictionaryItem> dictionary;
+    private static List<String> userFilter;
 
     public static String replace( String rawContent ){
         for ( String s : punctuation ){
             rawContent = rawContent.replace(s," ");
         }
         return rawContent;
+    }
+
+    public static void setUserFilter(List userFilterList){
+        userFilter = userFilterList;
+    }
+
+    public static boolean filterUser(String userID){
+        if ( userFilter == null ) return true;
+        if ( userFilter.contains(userID)) return true;
+        else return false;
     }
 
     public static void dict_init() {

@@ -31,4 +31,12 @@ public class ArrayUtil {
         Collections.sort(result);
         return result;
     }
+
+    public static List selectFromPositionList(List dataList, List<Integer> positionList){
+        List result = new ArrayList();
+        for ( int i : positionList ){
+            result.add(dataList.get(i));
+        }
+        return result;
+    }
 }
