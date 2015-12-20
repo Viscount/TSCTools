@@ -28,7 +28,7 @@ public class PersistenceUtil {
 
     public static List<Word> read(String danmakuID){
         try {
-            File file = new File(PARSE_FILE_PATH + danmakuID + ".parse");
+            File file = new File(PARSE_FILE_PATH + danmakuID);
             FileInputStream inputStream = new FileInputStream(file);
             InputStreamReader inputReader = new InputStreamReader(inputStream,"UTF-8");
             BufferedReader bufferedReader = new BufferedReader(inputReader);
@@ -49,7 +49,7 @@ public class PersistenceUtil {
     }
 
     public static boolean checkExist(String danmakuID){
-        File file = new File(PARSE_FILE_PATH + danmakuID + ".parse");
+        File file = new File(PARSE_FILE_PATH + danmakuID);
         return file.exists();
     }
 }
