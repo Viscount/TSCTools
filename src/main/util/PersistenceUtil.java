@@ -14,7 +14,7 @@ public class PersistenceUtil {
 
     public static void persist(String danmakuID, String json){
         try {
-            File file = new File(PARSE_FILE_PATH + danmakuID + ".parse");
+            File file = new File(PARSE_FILE_PATH + danmakuID);
             FileOutputStream fos = new FileOutputStream(file);
             OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
             osw.write(json);

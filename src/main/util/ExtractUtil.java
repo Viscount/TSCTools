@@ -78,6 +78,7 @@ public class ExtractUtil {
     }
 
     public Map<String,Long> extractUserWords( String userID ){
+        if (!NoiseWiper.filterUser(userID)) return null;
         Map<String,Long> wordsCount = new HashMap<String,Long>();
         for ( Danmaku danmaku : danmakuList ){
             if ( danmaku.getSenderId().equals(userID)){
