@@ -1,5 +1,6 @@
 package main.analysis;
 
+import main.collection.Global;
 import main.entity.Danmaku;
 import main.entity.Matrix;
 import main.entity.TimeWindow;
@@ -22,6 +23,7 @@ public class AnimationAnalysis {
 
     public static void main(String[] args){
         NoiseWiper.dict_init();
+        Global.init();
         List<String> userFilter = new ArrayList<>();
         Map<String,Long> userCount = new HashMap<String,Long>();
         for ( int i=0; i<EP_NUM; i++ ){
@@ -44,22 +46,25 @@ public class AnimationAnalysis {
         }
         List<Integer> position = ArrayUtil.selectTop(allCount,0.2);
         userFilter = ArrayUtil.selectFromPositionList(allUser,position);
+        Global.userID = userFilter;
         NoiseWiper.setUserFilter(userFilter);
 
         List<TimeWindow> timeWindowClipList = new ArrayList<TimeWindow>();
         for ( int i = 0; i< EP_NUM; i++ ) {
+            System.out.println("Episode "+i+" is processing...");
             List<TimeWindow> episodeTimeWindowClips = new ArrayList<TimeWindow>();
             Document xml = XMLUtil.readXML(PATH + FileUtil.generateAnimationFileName(ANIMATION_NAME, i));
             List<Danmaku> danmakuList = XMLUtil.extractFromFile(xml);
             Collections.sort(danmakuList);
 
             double latest = danmakuList.get(danmakuList.size()-1).getVideoSecond();
-            WINDOW_SIZE = latest / 3;
+            WINDOW_SIZE = latest / 12;
             WINDOW_SLIDE_STEP = WINDOW_SIZE;
             WindowBuilder windowBuilder = new WindowBuilder(WINDOW_SLIDE_STEP,WINDOW_SLIDE_STEP);
             episodeTimeWindowClips = windowBuilder.buildWindows(danmakuList);
             timeWindowClipList.addAll(episodeTimeWindowClips);
         }
+        System.out.println("Start build from clips...");
         WindowBuilder windowBuilder = new WindowBuilder(3);
         List<TimeWindow> timeWindows = windowBuilder.buildWindowsFromClip(timeWindowClipList);
         int matrixID = 0;

@@ -58,7 +58,6 @@ public class ExtractUtil {
         if (modifiedContent.length()<=0) return null;
 
         List<Word> wordList;
-        System.out.println("Danmuku "+danmakuPersistID+" is processing...");
         if ( PersistenceUtil.checkExist(danmakuPersistID) ) wordList = PersistenceUtil.read(danmakuPersistID);
         else {
             wordList = new LtpCloudUtil().parseText(modifiedContent);
@@ -90,7 +89,6 @@ public class ExtractUtil {
                 if (modifiedContent.length()<=0) return null;
 
                 List<Word> wordList;
-                System.out.println("Danmuku "+danmakuPersistID+" is processing...");
                 if ( PersistenceUtil.checkExist(danmakuPersistID) ) wordList = PersistenceUtil.read(danmakuPersistID);
                 else {
                     wordList = new LtpCloudUtil().parseText(modifiedContent);

@@ -45,7 +45,7 @@ public class WindowBuilder {
     public List<TimeWindow> buildWindows(List<Danmaku> sortedList){
         long idCount = 0;
         double currentWindowStart = 0;
-        double currentWindowEnd = currentWindowStart + windowSize;
+        double currentWindowEnd = Math.ceil(currentWindowStart + windowSize);
         List<TimeWindow> result = new ArrayList<TimeWindow>();
         while( sortedList.size() > 0 ){
             List<Danmaku> currentList = new ArrayList<Danmaku>();
@@ -63,8 +63,8 @@ public class WindowBuilder {
             timeWindow.buildFromDanmaku(currentList);
             result.add(timeWindow);
 
-            currentWindowStart += windSlideStep;
-            currentWindowEnd = currentWindowStart + windowSize;
+            currentWindowStart = Math.ceil(currentWindowStart + windSlideStep);
+            currentWindowEnd = Math.ceil(currentWindowStart + windowSize);
             for ( Danmaku danmaku : currentList ){
                 if ( danmaku.getVideoSecond() < currentWindowStart ) sortedList.remove(danmaku);
                 else break;

@@ -1,5 +1,5 @@
-n = 2497
-CmatrixNum = 618
+n = 3697
+CmatrixNum = 153
 WindowSize = 3
 eigenArray = array(0,dim = c(n,CmatrixNum))
 zArray = array(0,dim = CmatrixNum)
@@ -21,3 +21,5 @@ for (i in (WindowSize+1):CmatrixNum ){
   rt = rt / WindowSize
   zArray[i] = 1 - ut %*% rt/norm(as.matrix(ut),"f")/norm(as.matrix(rt),"f")
 }
+save(zArray,file = "zArrayFate12")
+save(eigenArray,file = "zArrayFate12Eigen")

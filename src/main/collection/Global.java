@@ -33,8 +33,9 @@ public class Global {
         try {
             File userFile = new File(USER_FILE_PATH);
             FileWriter fwriter = new FileWriter(userFile);
-            for ( String s : userID ){
-                fwriter.write(s+"\r\n");
+            for ( int i=0; i<userID.size(); i++ ){
+                String s = userID.get(i);
+                fwriter.write("ID "+(i+1)+": "+s+"\r\n");
             }
             fwriter.close();
 
