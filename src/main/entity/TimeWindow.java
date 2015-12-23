@@ -94,11 +94,20 @@ public class TimeWindow {
         for ( Danmaku danmaku : danmakuList ) averageLength += danmaku.getContent().length();
         averageLength = averageLength / numOfDanmaku;
         for ( String s : userIDList ){
-            Map<String,Long> userWords = extractUtil.extractUserWords(s);
+            Map<String,Long> userWords = extractUtil.extractWords(s);
             if ( userWords == null ) continue;
             Vector vector = new Vector(userWords);
             userFeature.put(s,vector);
         }
+    }
+
+    public Vector getAllMerge(){
+        Vector result = null;
+        for (  Map.Entry<String, Vector> entry : userFeature.entrySet() ){
+            Vector current = entry.getValue();
+            result = Vector.merge(result,current);
+        }
+        return result;
     }
 
     public void output(){
@@ -106,6 +115,17 @@ public class TimeWindow {
             File file = new File(".\\window\\Window" + id + ".txt");
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(JsonUtil.toJson(this));
+            fileWriter.close();
+        } catch ( Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void outputMerge(){
+        try {
+            File file = new File(".\\window\\WindowMerge" + id + ".txt");
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(JsonUtil.toJson(this.getAllMerge()));
             fileWriter.close();
         } catch ( Exception e){
             e.printStackTrace();

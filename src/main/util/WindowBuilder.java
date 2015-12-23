@@ -14,6 +14,7 @@ public class WindowBuilder {
     private double windowSize;
     private double windSlideStep;
     private int clipSize;
+    private int clipSlideStep;
 
     public WindowBuilder(double window_size, double window_slide_step){
         this.windowSize = window_size;
@@ -24,20 +25,22 @@ public class WindowBuilder {
         this.clipSize = clipSize;
     }
 
-    public void setClipSize(int n){
+    public void setClipParam(int n,int slide){
         this.clipSize = n;
+        this.clipSlideStep = slide;
     }
 
     public List<TimeWindow> buildWindowsFromClip(List<TimeWindow> timeWindowsClip){
         long idCount = 0;
         List<TimeWindow> result = new ArrayList<TimeWindow>();
-        for ( int i=0; i<timeWindowsClip.size()-clipSize; i++){
+        for ( int i=0; i<timeWindowsClip.size(); i+= clipSlideStep ){
             List<TimeWindow> candidateClip = new ArrayList<TimeWindow>();
             for (int j=0; j<clipSize; j++){
-                candidateClip.add(timeWindowsClip.get(i+j));
+                if( i+j < timeWindowsClip.size() ) candidateClip.add(timeWindowsClip.get(i+j));
             }
             TimeWindow timeWindow = new TimeWindow(idCount,candidateClip);
             result.add(timeWindow);
+            idCount++;
         }
         return result;
     }

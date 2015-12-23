@@ -20,7 +20,7 @@ public class DanmakuAnalysisOld {
     private static double WINDOW_SLIDE_STEP = 10;
 
     public static void main(String[] args){
-        Document xml = XMLUtil.readXML(".\\data\\movie\\3431021.xml");
+        Document xml = XMLUtil.readXML(".\\data\\movie\\2065063.xml");
         List<Danmaku> danmakuList = XMLUtil.extractFromFile(xml);
         Collections.sort(danmakuList);
         Global.init();
@@ -36,9 +36,13 @@ public class DanmakuAnalysisOld {
             userAlive.add(timeWindow.getUserAlive());
             numOfDanmaku.add(timeWindow.getNumOfDanmaku());
             averageLength.add(timeWindow.getAverageLength());
-            Matrix matrix = new Matrix(timeWindow);
-            matrix.output(matrixID, " ");
-            matrixID++;
+//            Matrix matrix = new Matrix(timeWindow);
+//            matrix.output(matrixID, " ");
+//            matrixID++;
+            timeWindow.outputMerge();
         }
+        Global.output();
+        FileUtil.output2File(numOfDanmaku,"numOfDanmaku10.txt");
+        FileUtil.output2File(userAlive,"userAlive10.txt");
     }
 }

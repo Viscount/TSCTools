@@ -14,7 +14,7 @@ public class PersistenceUtil {
 
     public static void persist(String danmakuID, String json){
         try {
-            File file = new File(PARSE_FILE_PATH + danmakuID);
+            File file = new File(PARSE_FILE_PATH + danmakuID + ".parse");
             FileOutputStream fos = new FileOutputStream(file);
             OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
             osw.write(json);
@@ -28,7 +28,7 @@ public class PersistenceUtil {
 
     public static List<Word> read(String danmakuID){
         try {
-            File file = new File(PARSE_FILE_PATH + danmakuID);
+            File file = new File(PARSE_FILE_PATH + danmakuID + ".parse");
             FileInputStream inputStream = new FileInputStream(file);
             InputStreamReader inputReader = new InputStreamReader(inputStream,"UTF-8");
             BufferedReader bufferedReader = new BufferedReader(inputReader);
@@ -49,7 +49,7 @@ public class PersistenceUtil {
     }
 
     public static boolean checkExist(String danmakuID){
-        File file = new File(PARSE_FILE_PATH + danmakuID);
+        File file = new File(PARSE_FILE_PATH + danmakuID + ".parse");
         return file.exists();
     }
 }

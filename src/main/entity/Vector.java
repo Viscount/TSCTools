@@ -48,6 +48,8 @@ public class Vector {
     }
 
     public static Vector merge( Vector v1, Vector v2){
+        if ( v1 == null ) return v2;
+        if ( v2 == null ) return v1;
         Map<String,Long> vectorCount = new HashMap<String,Long>();
         vectorCount.putAll(v1.getDetail());
         for ( Map.Entry<String,Long> entry : v2.getDetail().entrySet() ){

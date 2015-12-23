@@ -13,8 +13,11 @@ public class Matrix {
 
     double[][] detail;
 
+    int non_zero;
+
     public Matrix(TimeWindow timeWindow){
         detail = new double[Global.userID.size()][Global.userID.size()];
+        non_zero = 0;
         Map<String, Vector> userFeature = timeWindow.getUserFeature();
         for ( Map.Entry<String, Vector> entry1 : userFeature.entrySet() ){
             for ( Map.Entry<String, Vector> entry2 : userFeature.entrySet() ){
@@ -25,6 +28,7 @@ public class Matrix {
                 int rowID = Global.getUserIndex(userID1);
                 int lineID = Global.getUserIndex(userID2);
                 double simularity = Vector.simularity(vector1,vector2)*100;
+                if ( simularity > 0 ) non_zero++;
                 detail[rowID][lineID] = simularity;
                 detail[lineID][rowID] = detail[rowID][lineID];
             }
@@ -50,6 +54,9 @@ public class Matrix {
         } catch ( Exception e ){
             e.printStackTrace();
         }
+    }
 
+    public int getNonZero(){
+        return non_zero;
     }
 }
