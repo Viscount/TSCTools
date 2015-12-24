@@ -91,14 +91,14 @@ public class TimeWindow {
         userAlive = userIDList.size();
         numOfDanmaku = danmakuList.size();
         averageLength = 0;
-        for ( Danmaku danmaku : danmakuList ) averageLength += danmaku.getContent().length();
-        averageLength = averageLength / numOfDanmaku;
         for ( String s : userIDList ){
             Map<String,Long> userWords = extractUtil.extractWords(s);
             if ( userWords == null ) continue;
             Vector vector = new Vector(userWords);
             userFeature.put(s,vector);
+            averageLength += vector.getSize();
         }
+        this.averageLength = averageLength/numOfDanmaku;
     }
 
     public Vector getAllMerge(){

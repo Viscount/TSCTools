@@ -42,7 +42,8 @@ public class DanmakuAnalysisOld {
             timeWindow.outputMerge();
         }
         Global.output();
-        FileUtil.output2File(numOfDanmaku,"numOfDanmaku10.txt");
-        FileUtil.output2File(userAlive,"userAlive10.txt");
+        FileUtil.output2File(numOfDanmaku, "numOfDanmaku.txt");
+        FileUtil.output2File(userAlive,"userAlive.txt");
+        FileUtil.output2File(averageLength,"averageLength.txt");
     }
 }
