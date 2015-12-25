@@ -39,7 +39,7 @@ public class DanmakuAnalysisOld {
 //            Matrix matrix = new Matrix(timeWindow);
 //            matrix.output(matrixID, " ");
 //            matrixID++;
-            timeWindow.outputMerge();
+            timeWindow.output();
         }
         Global.output();
         FileUtil.output2File(numOfDanmaku, "numOfDanmaku.txt");

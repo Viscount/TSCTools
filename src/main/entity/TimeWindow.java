@@ -4,7 +4,9 @@ import main.util.JsonUtil;
 import main.util.ExtractUtil;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,9 +115,10 @@ public class TimeWindow {
     public void output(){
         try {
             File file = new File(".\\window\\Window" + id + ".txt");
-            FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(JsonUtil.toJson(this));
-            fileWriter.close();
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            OutputStreamWriter out = new OutputStreamWriter(fileOutputStream,"UTF-8");
+            out.write(JsonUtil.toJson(this));
+            out.close();
         } catch ( Exception e){
             e.printStackTrace();
         }
@@ -124,9 +127,10 @@ public class TimeWindow {
     public void outputMerge(){
         try {
             File file = new File(".\\window\\WindowMerge" + id + ".txt");
-            FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(JsonUtil.toJson(this.getAllMerge()));
-            fileWriter.close();
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            OutputStreamWriter out = new OutputStreamWriter(fileOutputStream,"UTF-8");
+            out.write(JsonUtil.toJson(this.getAllMerge()));
+            out.close();
         } catch ( Exception e){
             e.printStackTrace();
         }

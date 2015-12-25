@@ -27,7 +27,7 @@ public class Vector {
         return size;
     }
 
-    public static double simularity(Vector v1, Vector v2){
+    public static double similarity(Vector v1, Vector v2){
         long common = 0;
         Map<String,Long> wordCount = new HashMap<String,Long>();
         Map<String,Long> holder = v1.getDetail();
@@ -45,6 +45,14 @@ public class Vector {
             else wordCount.put(word,count);
         }
         return common * 1.0 / (v1.getSize()+v2.getSize());
+    }
+
+    public static double topicSimilarity(Vector v1,Vector v2){
+        double minCount = 0;
+        double maxCount = 0;
+
+        if ( maxCount > 0) return minCount/maxCount;
+        else return 0;
     }
 
     public static Vector merge( Vector v1, Vector v2){
