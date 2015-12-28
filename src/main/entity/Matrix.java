@@ -27,7 +27,7 @@ public class Matrix {
                 Vector vector2 = entry2.getValue();
                 int rowID = Global.getUserIndex(userID1);
                 int lineID = Global.getUserIndex(userID2);
-                double simularity = Vector.similarity(vector1,vector2)*100;
+                double simularity = Vector.topicSimilarity(vector1,vector2)*100;
                 if ( simularity > 0 ) non_zero++;
                 detail[rowID][lineID] = simularity;
                 detail[lineID][rowID] = detail[rowID][lineID];

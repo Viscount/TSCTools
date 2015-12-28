@@ -3,7 +3,12 @@ package main.util;
 import main.entity.Danmaku;
 import main.entity.TimeWindow;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -28,6 +33,25 @@ public class WindowBuilder {
     public void setClipParam(int n,int slide){
         this.clipSize = n;
         this.clipSlideStep = slide;
+    }
+
+    public List<TimeWindow> buildWindowsFromFile(String folderPath){
+        List<TimeWindow> result = new ArrayList<TimeWindow>();
+        try {
+            File folder = new File(folderPath);
+            for (File file : folder.listFiles()) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+                String content = "";
+                String line;
+                while ((line = br.readLine()) != null) content += line;
+                br.close();
+                TimeWindow timeWindow = JsonUtil.toObject(content, TimeWindow.class);
+                result.add(timeWindow);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public List<TimeWindow> buildWindowsFromClip(List<TimeWindow> timeWindowsClip){

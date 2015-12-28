@@ -76,9 +76,9 @@ public class Corpus {
             while ((line = br.readLine()) != null) content += line;
             br.close();
             Vector vector = JsonUtil.toObject(content, Vector.class);
-            for (Map.Entry<String,Long> entry : vector.getDetail().entrySet() ){
+            for (Map.Entry<String,Object> entry : vector.getDetail().entrySet() ){
                 String word = entry.getKey();
-                long count = entry.getValue();
+                long count = (long)entry.getValue();
                 for ( long i=0; i<count; i++ ) wordList.add(word);
             }
             corpus.addDocument(wordList);

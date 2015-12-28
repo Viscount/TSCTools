@@ -94,7 +94,7 @@ public class TimeWindow {
         numOfDanmaku = danmakuList.size();
         averageLength = 0;
         for ( String s : userIDList ){
-            Map<String,Long> userWords = extractUtil.extractWords(s);
+            Map<String,Object> userWords = extractUtil.extractWords(s);
             if ( userWords == null ) continue;
             Vector vector = new Vector(userWords);
             userFeature.put(s,vector);

@@ -42,10 +42,10 @@ public class ExtractUtil {
         }
     }
 
-    public Map<String,Long> extractWords( String userID ){
+    public Map<String,Object> extractWords( String userID ){
         String content = "";
         String danmakuPersistID = "";
-        Map<String,Long> wordsCount = new HashMap<String,Long>();
+        Map<String,Object> wordsCount = new HashMap<String,Object>();
         for ( Danmaku danmaku : danmakuList ){
             if( danmaku.getSenderId().equals(userID) ){
                 content = content + " " +danmaku.getContent();
@@ -69,7 +69,7 @@ public class ExtractUtil {
             if ( NoiseWiper.wipeWordType(word) ) continue;
             if ( !wordsCount.containsKey(word.getCont()) ) wordsCount.put(word.getCont(),1L);
             else {
-                long count = wordsCount.get(word.getCont());
+                long count = (long)wordsCount.get(word.getCont());
                 wordsCount.put(word.getCont(),count+1);
             }
         }

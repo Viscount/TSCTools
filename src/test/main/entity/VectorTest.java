@@ -19,11 +19,11 @@ public class VectorTest {
 
     @Before
     public void setUp() throws Exception{
-        Map<String,Long> wordCount = new HashMap<String,Long>();
+        Map<String,Object> wordCount = new HashMap<String,Object>();
         wordCount.put("haha",2L);
         wordCount.put("go",1L);
         v1 = new Vector(wordCount);
-        wordCount = new HashMap<String,Long>();
+        wordCount = new HashMap<String,Object>();
         wordCount.put("haha",2L);
         wordCount.put("nice",1L);
         v2 = new Vector(wordCount);
@@ -31,14 +31,14 @@ public class VectorTest {
 
     @Test
     public void testSimularity() throws Exception {
-        double sim = Vector.simularity(v1,v2);
+        double sim = Vector.similarity(v1,v2);
         Assert.assertEquals(4.0/6.0,sim,0.001);
     }
 
     @Test
     public void testMerge() throws Exception {
         Vector v = Vector.merge(v1,v2);
-        Map<String,Long> wordCount = new HashMap<String,Long>();
+        Map<String,Object> wordCount = new HashMap<String,Object>();
         wordCount.put("haha",4L);
         wordCount.put("go",1L);
         wordCount.put("nice",1L);
