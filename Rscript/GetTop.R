@@ -1,7 +1,7 @@
-n = 3697
-CmatrixNum = 153
+n = 2497
+CmatrixNum = 618
 WindowSize = 3
-num = 5
+num = 1
 zArraywithPos = array(0,dim=c(CmatrixNum,2))
 for ( i in 1:CmatrixNum){
   zArraywithPos[i,]=c(i,zArray[i])
@@ -9,8 +9,8 @@ for ( i in 1:CmatrixNum){
 zArraywithPos = zArraywithPos[order(zArraywithPos[,2]),]
 
 start = 3;
-utTotal = 0
-rtTotal = 0
+utTotal = NULL
+rtTotal = NULL
 for ( i in 1:num ){
   pos = zArraywithPos[start+i,1]
   ut = eigenArray[,pos]

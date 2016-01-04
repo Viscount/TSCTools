@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by TongjiSSE on 2015/11/13.
  */
-public class TimeWindow {
+public class TimeWindow implements Comparable<TimeWindow>{
     private long id;
     private double startTime, endTime;
     private int userAlive;
@@ -134,5 +134,12 @@ public class TimeWindow {
         } catch ( Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public int compareTo(TimeWindow o) {
+        if ( this.getStartTime() == o.getStartTime() ) return 0;
+        else if ( this.getStartTime() < o.getStartTime() ) return -1;
+        else return 1;
     }
 }

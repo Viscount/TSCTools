@@ -1,5 +1,5 @@
 n = 2497
-CmatrixNum = 206
+CmatrixNum = 618
 WindowSize = 3
 k = 1000;
 max = 0;

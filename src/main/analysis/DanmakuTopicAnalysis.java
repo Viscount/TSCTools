@@ -32,14 +32,14 @@ public class DanmakuTopicAnalysis {
         List userAlive = new ArrayList<Integer>();
         List numOfDanmaku = new ArrayList<Integer>();
         List averageLength = new ArrayList<Double>();
-        int matrixID = 0;
+        Collections.sort(timeWindowClipList);
         for ( TimeWindow timeWindow : timeWindowClipList ){
             userAlive.add(timeWindow.getUserAlive());
             numOfDanmaku.add(timeWindow.getNumOfDanmaku());
             averageLength.add(timeWindow.getAverageLength());
             Matrix matrix = new Matrix(timeWindow);
+            int matrixID = Integer.parseInt(Long.toString(timeWindow.getId()));
             matrix.output(matrixID, " ");
-            matrixID++;
         }
         Global.output();
         FileUtil.output2File(numOfDanmaku, "numOfDanmaku.txt");
